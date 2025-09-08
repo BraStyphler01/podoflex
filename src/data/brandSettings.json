@@ -1,0 +1,82 @@
+{
+  "brand": {
+    "name": "Podoflex by Heidi",
+    "tagline": {
+      "en": "Step into healing, stay in comfort.",
+      "fr": "Entrez dans la guérison, restez dans le confort."
+    },
+    "description": {
+      "en": "Podoflex by Heidi is dedicated to your foot health and overall holistic well-being. Our services encompass advanced medical pedicures, soothing reflexotherapy treatments, and a curated selection of foot care products. We also provide expert professional consultancy and valuable foot health training and education.",
+      "fr": "Podoflex by Heidi est dédié à la santé de vos pieds et à votre bien-être holistique. Nos services incluent des pédicures médicales avancées, des séances apaisantes de réflexothérapie et une sélection soignée de produits de soins des pieds. Nous proposons également des conseils professionnels et des formations utiles en santé du pied."
+    },
+    "logo": "/lovable-uploads/d383d914-c1de-4968-92b0-1d29f01190ad.png",
+    "favicon": "/lovable-uploads/f55ef720-f8fd-4b0b-91c8-aade675ea621.png"
+  },
+  "contact": {
+    "email": "podoflexbyheidi@gmail.com",
+    "whatsapp": "+1234567890",
+    "instagram": "https://www.instagram.com/podoflex_by_heidi",
+    "linktree": "https://linktr.ee/PodoflexbyHeidi"
+  },
+  "theme": {
+    "colors": {
+      "primary": "#125959",
+      "secondary": "#898C26",
+      "background": "#ffffff",
+      "text": "#0f172a"
+    },
+    "fonts": {
+      "primary": "Inter"
+    }
+  },
+  "services": [
+    {
+      "id": "medical-pedicures",
+      "title": {
+        "en": "Advanced Medical Pedicures",
+        "fr": "Pédicures médicales avancées"
+      },
+      "description": {
+        "en": "Professional medical-grade pedicure treatments for optimal foot health and care.",
+        "fr": "Traitements de pédicure de niveau médical pour une santé et des soins optimaux des pieds."
+      },
+      "icon": "stethoscope"
+    },
+    {
+      "id": "reflexotherapy",
+      "title": {
+        "en": "Reflexotherapy Treatments",
+        "fr": "Réflexothérapie"
+      },
+      "description": {
+        "en": "Soothing therapeutic sessions that promote relaxation and holistic wellness.",
+        "fr": "Séances thérapeutiques apaisantes qui favorisent la relaxation et le bien-être holistique."
+      },
+      "icon": "sparkles"
+    },
+    {
+      "id": "foot-care",
+      "title": {
+        "en": "Foot Care Products",
+        "fr": "Produits de soins des pieds"
+      },
+      "description": {
+        "en": "Curated selection of premium products for maintaining healthy, comfortable feet.",
+        "fr": "Sélection soignée de produits premium pour maintenir des pieds sains et confortables."
+      },
+      "icon": "package"
+    },
+    {
+      "id": "consultancy",
+      "title": {
+        "en": "Consultancy & Training",
+        "fr": "Conseil & Formation"
+      },
+      "description": {
+        "en": "Expert professional advice and educational training in foot health and wellness.",
+        "fr": "Conseils professionnels experts et formation éducative en santé et bien-être des pieds."
+      },
+      "icon": "graduation-cap"
+    }
+  ]
+}

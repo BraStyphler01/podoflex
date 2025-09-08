@@ -1,9 +1,10 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useBrandSettings } from '@/contexts/BrandSettingsContext';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Stethoscope, Sparkles, Package, GraduationCap } from 'lucide-react';
 
-const WHATSAPP_NUMBER = "+1234567890"; // Replace with actual number
+const WHATSAPP_NUMBER = "+1234567890"; // This will be replaced by brand settings
 
 interface ServiceCardProps {
   icon: React.ReactNode;
@@ -43,35 +44,20 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description, onB
 };
 
 export const ServicesGrid: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+  const { settings } = useBrandSettings();
 
   const handleBookClick = () => {
     const message = encodeURIComponent(t('whatsapp.message'));
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+    window.open(`https://wa.me/${settings.contact.whatsapp}?text=${message}`, '_blank');
   };
 
-  const services = [
-    {
-      icon: <Stethoscope className="w-8 h-8 text-teal" />,
-      title: t('services.medical_pedicures'),
-      description: t('services.medical_pedicures_desc'),
-    },
-    {
-      icon: <Sparkles className="w-8 h-8 text-olive" />,
-      title: t('services.reflexotherapy'),
-      description: t('services.reflexotherapy_desc'),
-    },
-    {
-      icon: <Package className="w-8 h-8 text-teal" />,
-      title: t('services.foot_care'),
-      description: t('services.foot_care_desc'),
-    },
-    {
-      icon: <GraduationCap className="w-8 h-8 text-olive" />,
-      title: t('services.consultancy'),
-      description: t('services.consultancy_desc'),
-    },
-  ];
+  const iconMap = {
+    'stethoscope': <Stethoscope className="w-8 h-8 text-teal" />,
+    'sparkles': <Sparkles className="w-8 h-8 text-olive" />,
+    'package': <Package className="w-8 h-8 text-teal" />,
+    'graduation-cap': <GraduationCap className="w-8 h-8 text-olive" />,
+  };
 
   return (
     <section id="services" className="py-20 bg-gradient-subtle relative overflow-hidden">
@@ -86,12 +72,12 @@ export const ServicesGrid: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {services.map((service, index) => (
+          {settings.services.map((service, index) => (
             <ServiceCard
-              key={index}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
+              key={service.id}
+              icon={iconMap[service.icon as keyof typeof iconMap] || <Package className="w-8 h-8 text-teal" />}
+              title={service.title[language]}
+              description={service.description[language]}
               onBookClick={handleBookClick}
             />
           ))}

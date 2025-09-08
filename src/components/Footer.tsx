@@ -1,8 +1,10 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useBrandSettings } from '@/contexts/BrandSettingsContext';
 
 export const Footer: React.FC = () => {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+  const { settings } = useBrandSettings();
 
   return (
     <footer className="bg-ink py-12 relative overflow-hidden">
@@ -14,15 +16,15 @@ export const Footer: React.FC = () => {
           {/* Logo */}
           <div className="mb-6">
             <img 
-              src="/lovable-uploads/d383d914-c1de-4968-92b0-1d29f01190ad.png" 
-              alt="Podoflex by Heidi"
+              src={settings.brand.logo}
+              alt={settings.brand.name}
               className="w-20 h-20 mx-auto"
             />
           </div>
           
           {/* Slogan */}
           <p className="text-white/90 text-lg mb-8 italic">
-            {t('footer.slogan')}
+            {settings.brand.tagline[language]}
           </p>
           
           {/* Legal */}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useBrandSettings } from '@/contexts/BrandSettingsContext';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Mail } from 'lucide-react';
 
@@ -7,14 +8,15 @@ const WHATSAPP_NUMBER = "+1234567890"; // Replace with actual number
 
 export const CtaStripe: React.FC = () => {
   const { t } = useLanguage();
+  const { settings } = useBrandSettings();
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent(t('whatsapp.message'));
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+    window.open(`https://wa.me/${settings.contact.whatsapp}?text=${message}`, '_blank');
   };
 
   const handleEmailClick = () => {
-    window.open('mailto:podoflexbyheidi@gmail.com', '_blank');
+    window.open(`mailto:${settings.contact.email}`, '_blank');
   };
 
   return (

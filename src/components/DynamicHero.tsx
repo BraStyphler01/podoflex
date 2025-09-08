@@ -1,21 +1,21 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useBrandSettings } from '@/contexts/BrandSettingsContext';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Mail, ChevronDown } from 'lucide-react';
 import heroImage from '@/assets/hero-bg.jpg';
 
-const WHATSAPP_NUMBER = "+1234567890"; // Replace with actual number
-
-export const Hero: React.FC = () => {
-  const { t } = useLanguage();
+export const DynamicHero: React.FC = () => {
+  const { language, t } = useLanguage();
+  const { settings } = useBrandSettings();
 
   const handleWhatsAppClick = () => {
     const message = encodeURIComponent(t('whatsapp.message'));
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+    window.open(`https://wa.me/${settings.contact.whatsapp}?text=${message}`, '_blank');
   };
 
   const handleEmailClick = () => {
-    window.open('mailto:podoflexbyheidi@gmail.com', '_blank');
+    window.open(`mailto:${settings.contact.email}`, '_blank');
   };
 
   const handleExploreClick = () => {
@@ -38,25 +38,25 @@ export const Hero: React.FC = () => {
       
       <div className="container mx-auto px-6 py-20 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          {/* Podoflex Logo */}
+          {/* Dynamic Logo */}
           <div className="mb-8">
             <img 
-              src="/lovable-uploads/d383d914-c1de-4968-92b0-1d29f01190ad.png" 
-              alt="Podoflex by Heidi - Professional Foot Care & Wellness"
+              src={settings.brand.logo}
+              alt={`${settings.brand.name} - Professional Foot Care & Wellness`}
               className="w-48 h-48 md:w-56 md:h-56 mx-auto"
             />
           </div>
           
           {/* Hero Content */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-ink mb-6 leading-tight">
-            <span className="block text-teal">Podoflex</span>
+            <span className="block text-teal">{settings.brand.name.split(' ')[0]}</span>
             <span className="block text-olive text-2xl md:text-3xl lg:text-4xl font-medium mt-2">
-              by Heidi
+              {settings.brand.name.split(' ').slice(1).join(' ')}
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-ink/80 mb-12 max-w-2xl mx-auto leading-relaxed">
-            {t('hero.tagline')}
+            {settings.brand.tagline[language]}
           </p>
           
           {/* Primary CTAs */}

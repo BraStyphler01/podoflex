@@ -1,26 +1,28 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useBrandSettings } from '@/contexts/BrandSettingsContext';
 import { LangToggle } from './LangToggle';
 import { Instagram, Link2, Mail } from 'lucide-react';
 
 export const TopBar: React.FC = () => {
   const { t } = useLanguage();
+  const { settings } = useBrandSettings();
 
   const socialLinks = [
     {
       name: t('nav.instagram'),
       icon: <Instagram className="w-4 h-4" />,
-      url: 'https://www.instagram.com/podoflex_by_heidi',
+      url: settings.contact.instagram,
     },
     {
       name: t('nav.linktree'),
       icon: <Link2 className="w-4 h-4" />,
-      url: 'https://linktr.ee/PodoflexbyHeidi',
+      url: settings.contact.linktree,
     },
     {
       name: t('nav.email'),
       icon: <Mail className="w-4 h-4" />,
-      url: 'mailto:podoflexbyheidi@gmail.com',
+      url: `mailto:${settings.contact.email}`,
     },
   ];
 
