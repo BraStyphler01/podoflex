@@ -38,11 +38,13 @@ export const Hero: React.FC = () => {
       
       <div className="container mx-auto px-6 py-20 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          {/* Logo placeholder - will be replaced with actual logo */}
+          {/* Podoflex Logo */}
           <div className="mb-8">
-            <div className="w-24 h-24 mx-auto bg-gradient-primary rounded-2xl flex items-center justify-center shadow-card">
-              <span className="text-2xl font-bold text-white">P</span>
-            </div>
+            <img 
+              src="/lovable-uploads/d383d914-c1de-4968-92b0-1d29f01190ad.png" 
+              alt="Podoflex by Heidi - Professional Foot Care & Wellness"
+              className="w-32 h-32 mx-auto"
+            />
           </div>
           
           {/* Hero Content */}
