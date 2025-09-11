@@ -14,9 +14,30 @@
   },
   "contact": {
     "email": "podoflexbyheidi@gmail.com",
-    "whatsapp": "+1234567890",
+    "whatsapp": "+32471264101",
     "instagram": "https://www.instagram.com/podoflex_by_heidi",
-    "linktree": "https://linktr.ee/PodoflexbyHeidi"
+    "linktree": "https://linktr.ee/PodoflexbyHeidi",
+    "tiktok": "https://www.tiktok.com/@podoflexbyheidi"
+  },
+  "workingHours": {
+    "en": {
+      "monday": "Appointment only",
+      "tuesday": "Appointment only", 
+      "wednesday": "Appointment only",
+      "thursday": "Appointment only",
+      "friday": "Appointment only",
+      "saturday": "Appointment only",
+      "sunday": "Closed"
+    },
+    "fr": {
+      "monday": "Sur rendez-vous uniquement",
+      "tuesday": "Sur rendez-vous uniquement",
+      "wednesday": "Sur rendez-vous uniquement", 
+      "thursday": "Sur rendez-vous uniquement",
+      "friday": "Sur rendez-vous uniquement",
+      "saturday": "Sur rendez-vous uniquement",
+      "sunday": "Fermé"
+    }
   },
   "theme": {
     "colors": {
@@ -26,7 +47,19 @@
       "text": "#0f172a"
     },
     "fonts": {
-      "primary": "Inter"
+      "primary": "Inter",
+      "options": [
+        "Inter",
+        "Poppins",
+        "Roboto",
+        "Open Sans",
+        "Lato",
+        "Montserrat",
+        "Source Sans Pro",
+        "Raleway",
+        "Nunito",
+        "Playfair Display"
+      ]
     }
   },
   "services": [

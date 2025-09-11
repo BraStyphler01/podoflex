@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useBrandSettings } from '@/contexts/BrandSettingsContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Instagram, Link2, Mail } from 'lucide-react';
+import { Instagram, Link2, Mail, MessageCircle, Video, Clock } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const { settings } = useBrandSettings();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,7 +24,7 @@ export const ContactSection: React.FC = () => {
     e.preventDefault();
     const { name, email, message } = formData;
     const emailBody = `From: ${name} (${email})\n\n${message}`;
-    const mailtoLink = `mailto:podoflexbyheidi@gmail.com?subject=Contact from ${name}&body=${encodeURIComponent(emailBody)}`;
+    const mailtoLink = `mailto:${settings.contact.email}?subject=Contact from ${name}&body=${encodeURIComponent(emailBody)}`;
     window.open(mailtoLink, '_blank');
     
     // Reset form
@@ -33,17 +35,27 @@ export const ContactSection: React.FC = () => {
     {
       name: 'Instagram',
       icon: <Instagram className="w-5 h-5" />,
-      url: 'https://www.instagram.com/podoflex_by_heidi',
+      url: settings.contact.instagram,
     },
     {
-      name: 'Linktree',
+      name: 'Linktree', 
       icon: <Link2 className="w-5 h-5" />,
-      url: 'https://linktr.ee/PodoflexbyHeidi',
+      url: settings.contact.linktree,
+    },
+    {
+      name: 'TikTok',
+      icon: <Video className="w-5 h-5" />,
+      url: settings.contact.tiktok,
+    },
+    {
+      name: 'WhatsApp',
+      icon: <MessageCircle className="w-5 h-5" />,
+      url: `https://wa.me/${settings.contact.whatsapp.replace(/[^0-9]/g, '')}`,
     },
     {
       name: 'Email',
       icon: <Mail className="w-5 h-5" />,
-      url: 'mailto:podoflexbyheidi@gmail.com',
+      url: `mailto:${settings.contact.email}`,
     },
   ];
 
@@ -141,6 +153,39 @@ export const ContactSection: React.FC = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Contact Info */}
+              <div className="bg-white rounded-xl p-6 shadow-soft">
+                <h4 className="text-lg font-semibold text-teal mb-4">Contact Information</h4>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-teal" />
+                    <span className="text-ink">{settings.contact.email}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <MessageCircle className="w-4 h-4 text-teal" />
+                    <span className="text-ink">{settings.contact.whatsapp}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Working Hours */}
+              {settings.workingHours && (
+                <div className="bg-white rounded-xl p-6 shadow-soft">
+                  <h4 className="text-lg font-semibold text-teal mb-4 flex items-center gap-2">
+                    <Clock className="w-5 h-5" />
+                    Working Hours
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    {Object.entries(settings.workingHours[language] || {}).map(([day, hours]) => (
+                      <div key={day} className="flex justify-between">
+                        <span className="text-ink capitalize font-medium">{day}:</span>
+                        <span className="text-ink">{hours as string}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

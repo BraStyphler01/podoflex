@@ -14,6 +14,11 @@ export interface BrandSettings {
     whatsapp: string;
     instagram: string;
     linktree: string;
+    tiktok: string;
+  };
+  workingHours: {
+    en: { [key: string]: string };
+    fr: { [key: string]: string };
   };
   theme: {
     colors: {
@@ -24,6 +29,7 @@ export interface BrandSettings {
     };
     fonts: {
       primary: string;
+      options: string[];
     };
   };
   services: Array<{
