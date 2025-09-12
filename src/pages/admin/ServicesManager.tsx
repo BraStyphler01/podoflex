@@ -71,12 +71,12 @@ export const ServicesManager: React.FC<ServicesManagerProps> = ({ formData, setF
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold">Services Management</h2>
           <p className="text-gray-600">Add, edit, or remove your service offerings</p>
         </div>
-        <Button onClick={addService} className="flex items-center gap-2">
+        <Button onClick={addService} className="flex items-center gap-2 w-full sm:w-auto">
           <Plus className="w-4 h-4" />
           Add Service
         </Button>
@@ -85,7 +85,7 @@ export const ServicesManager: React.FC<ServicesManagerProps> = ({ formData, setF
       {formData.services.map((service: any, index: number) => (
         <Card key={service.id}>
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <CardTitle>Service {index + 1}</CardTitle>
                 <CardDescription>ID: {service.id}</CardDescription>
@@ -95,7 +95,7 @@ export const ServicesManager: React.FC<ServicesManagerProps> = ({ formData, setF
                   variant="outline"
                   size="sm"
                   onClick={() => deleteService(index)}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-2 w-full sm:w-auto"
                 >
                   <Trash2 className="w-4 h-4" />
                   Delete
@@ -104,7 +104,7 @@ export const ServicesManager: React.FC<ServicesManagerProps> = ({ formData, setF
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label>Title (English)</Label>
                 <Input
@@ -121,7 +121,7 @@ export const ServicesManager: React.FC<ServicesManagerProps> = ({ formData, setF
               </div>
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div>
                 <Label>Description (English)</Label>
                 <Textarea
