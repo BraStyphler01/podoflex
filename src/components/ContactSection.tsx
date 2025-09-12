@@ -72,9 +72,45 @@ export const ContactSection: React.FC = () => {
             </h2>
           </div>
           
+          {/* Contact Information - Mobile First */}
+          <div className="lg:hidden space-y-8 mb-12">
+            {/* Contact Info */}
+            <div className="bg-white rounded-xl p-6 shadow-soft">
+              <h4 className="text-lg font-semibold text-teal mb-4">Contact Information</h4>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-teal" />
+                  <span className="text-ink">{settings.contact.email}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MessageCircle className="w-4 h-4 text-teal" />
+                  <span className="text-ink">{settings.contact.whatsapp}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Working Hours */}
+            {settings.workingHours && (
+              <div className="bg-white rounded-xl p-6 shadow-soft">
+                <h4 className="text-lg font-semibold text-teal mb-4 flex items-center gap-2">
+                  <Clock className="w-5 h-5" />
+                  Working Hours
+                </h4>
+                <div className="space-y-2 text-sm">
+                  {Object.entries(settings.workingHours[language] || {}).map(([day, hours]) => (
+                    <div key={day} className="flex justify-between">
+                      <span className="text-ink capitalize font-medium">{day}:</span>
+                      <span className="text-ink">{hours as string}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <div className="bg-gradient-subtle rounded-2xl p-8 shadow-card">
+            <div className="bg-gradient-subtle rounded-2xl p-8 shadow-card lg:order-1 order-2">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-ink mb-2">
@@ -127,8 +163,9 @@ export const ContactSection: React.FC = () => {
               </form>
             </div>
             
-            {/* Quick Links */}
-            <div className="space-y-8">
+            {/* Quick Links & Contact Info (Desktop) */}
+            <div className="space-y-8 lg:order-2 order-3">
+              {/* Quick Links */}
               <div>
                 <h3 className="text-2xl font-semibold text-teal mb-6">
                   {t('contact.quick_links')}
@@ -154,8 +191,8 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Contact Info */}
-              <div className="bg-white rounded-xl p-6 shadow-soft">
+              {/* Contact Info - Desktop Only */}
+              <div className="hidden lg:block bg-white rounded-xl p-6 shadow-soft">
                 <h4 className="text-lg font-semibold text-teal mb-4">Contact Information</h4>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-center gap-2">
@@ -169,9 +206,9 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Working Hours */}
+              {/* Working Hours - Desktop Only */}
               {settings.workingHours && (
-                <div className="bg-white rounded-xl p-6 shadow-soft">
+                <div className="hidden lg:block bg-white rounded-xl p-6 shadow-soft">
                   <h4 className="text-lg font-semibold text-teal mb-4 flex items-center gap-2">
                     <Clock className="w-5 h-5" />
                     Working Hours
