@@ -7,6 +7,7 @@ import { BrandSettingsProvider } from "@/contexts/BrandSettingsContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import PodoflexLanding from "./pages/PodoflexLanding";
+import DatabasePodoflexLanding from "./pages/DatabasePodoflexLanding";
 import AdminPanel from "./pages/AdminPanel";
 import Login from "./pages/Login";
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -24,7 +25,8 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<PodoflexLanding />} />
+                <Route path="/" element={<DatabasePodoflexLanding />} />
+                <Route path="/old" element={<PodoflexLanding />} />
                 <Route path="/login" element={<Login />} />
                 <Route 
                   path="/admin/*" 

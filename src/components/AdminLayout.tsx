@@ -37,6 +37,8 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onSave, onReset, onPre
     { href: '/admin/services', icon: Briefcase, label: 'Services' },
     { href: '/admin/hours', icon: Clock, label: 'Working Hours' },
     { href: '/admin/theme', icon: Palette, label: 'Theme' },
+    { href: '/admin/users', icon: Settings, label: 'Users' },
+    { href: '/admin/content', icon: Settings, label: 'Content' },
   ];
 
   const NavContent = ({ mobile = false }: { mobile?: boolean }) => (
