@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { useAuth } from '@/hooks/useAuth';
 import { 
   Settings, 
   User, 
@@ -14,7 +15,8 @@ import {
   Home,
   Clock,
   Menu,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 
 interface AdminLayoutProps {
@@ -27,6 +29,7 @@ interface AdminLayoutProps {
 export const AdminLayout: React.FC<AdminLayoutProps> = ({ onSave, onReset, onPreview, children }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const { signOut, user } = useAuth();
 
   const navItems = [
     { href: '/admin', icon: User, label: 'Brand Info' },
@@ -124,6 +127,10 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onSave, onReset, onPre
             <Button size="sm" onClick={onSave}>
               <Save className="w-4 h-4 sm:mr-2" />
               <span className="hidden sm:inline">Save</span>
+            </Button>
+            <Button variant="outline" size="sm" onClick={signOut} className="text-destructive hover:text-destructive">
+              <LogOut className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Logout</span>
             </Button>
           </div>
         </header>
