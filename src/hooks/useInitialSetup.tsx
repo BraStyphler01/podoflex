@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/hooks/useAuth';
 
 export const useInitialSetup = () => {
   const [needsSetup, setNeedsSetup] = useState(false);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const { signIn } = useAuth();
 
   const checkForAdmin = async () => {
     try {
@@ -27,12 +29,11 @@ export const useInitialSetup = () => {
 
   const createInitialAdmin = async (email: string, password: string, fullName: string) => {
     try {
-      // Sign up the first admin user
+      // Sign up the first admin user (without email redirect since we'll sign in immediately)
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/admin`,
           data: {
             full_name: fullName
           }
@@ -53,10 +54,30 @@ export const useInitialSetup = () => {
 
         if (profileError) throw profileError;
 
-        toast({
-          title: "Admin Account Created",
-          description: "Initial admin account created successfully. Please check your email to confirm your account."
-        });
+        // If email confirmation is disabled, the user is already signed in
+        // If email confirmation is enabled but we got a user back, try to sign in
+        if (!authData.session) {
+          // Attempt to sign in immediately (works when email confirmation is disabled)
+          const { error: signInError } = await signIn(email, password);
+          
+          if (signInError) {
+            // Email confirmation is likely required
+            toast({
+              title: "Admin Account Created",
+              description: "Account created successfully. Please check your email to confirm your account, then return to sign in."
+            });
+          } else {
+            toast({
+              title: "Welcome!",
+              description: "Admin account created and you're now signed in. Welcome to your admin panel!"
+            });
+          }
+        } else {
+          toast({
+            title: "Welcome!",
+            description: "Admin account created and you're now signed in. Welcome to your admin panel!"
+          });
+        }
 
         setNeedsSetup(false);
         return { success: true };

@@ -105,8 +105,8 @@ const InitialSetup: React.FC = () => {
             <h4 className="text-sm font-medium mb-2">What happens next?</h4>
             <ul className="text-sm text-muted-foreground space-y-1">
               <li>• An admin account will be created with full access</li>
-              <li>• You'll receive an email to confirm your account</li>
-              <li>• After confirmation, you can log in and manage the system</li>
+              <li>• You'll be automatically signed in to the admin panel</li>
+              <li>• You can immediately start managing the system</li>
               <li>• You can create additional users from the admin panel</li>
             </ul>
           </div>
