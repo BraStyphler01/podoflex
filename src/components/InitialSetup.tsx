@@ -101,6 +101,18 @@ const InitialSetup: React.FC = () => {
             </Button>
           </form>
 
+          <div className="mt-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              Already have an account?{' '}
+              <a 
+                href="/login" 
+                className="text-primary hover:underline font-medium"
+              >
+                Sign in here
+              </a>
+            </p>
+          </div>
+
           <div className="mt-6 p-4 bg-muted rounded-lg">
             <h4 className="text-sm font-medium mb-2">What happens next?</h4>
             <ul className="text-sm text-muted-foreground space-y-1">
