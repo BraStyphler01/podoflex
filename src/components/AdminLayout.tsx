@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useAuth } from '@/hooks/useAuth';
@@ -30,6 +30,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onSave, onReset, onPre
   const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const { signOut, user } = useAuth();
+  const location = useLocation();
 
   const navItems = [
     { href: '/admin', icon: User, label: 'Brand Info' },
@@ -43,17 +44,24 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onSave, onReset, onPre
 
   const NavContent = ({ mobile = false }: { mobile?: boolean }) => (
     <nav className="space-y-2">
-      {navItems.map((item) => (
-        <a 
-          key={item.href}
-          href={item.href} 
-          className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-          onClick={mobile ? () => setMobileMenuOpen(false) : undefined}
-        >
-          <item.icon className="w-4 h-4 flex-shrink-0" />
-          {(!sidebarCollapsed || mobile) && <span className="text-sm font-medium">{item.label}</span>}
-        </a>
-      ))}
+      {navItems.map((item) => {
+        const isActive = location.pathname === item.href;
+        return (
+          <Link 
+            key={item.href}
+            to={item.href} 
+            className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+              isActive 
+                ? 'bg-primary/10 text-primary font-medium' 
+                : 'hover:bg-gray-100'
+            }`}
+            onClick={mobile ? () => setMobileMenuOpen(false) : undefined}
+          >
+            <item.icon className="w-4 h-4 flex-shrink-0" />
+            {(!sidebarCollapsed || mobile) && <span className="text-sm font-medium">{item.label}</span>}
+          </Link>
+        );
+      })}
     </nav>
   );
 

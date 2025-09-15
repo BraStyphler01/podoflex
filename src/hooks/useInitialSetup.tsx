@@ -13,7 +13,7 @@ export const useInitialSetup = () => {
     try {
       const { data, error } = await supabase
         .from('profiles')
-        .select('id')
+        .select('id, role')
         .eq('role', 'admin')
         .limit(1);
 
@@ -22,6 +22,8 @@ export const useInitialSetup = () => {
       setNeedsSetup(!data || data.length === 0);
     } catch (error) {
       console.error('Error checking for admin:', error);
+      // If there's an error checking, assume setup is not needed to avoid blocking access
+      setNeedsSetup(false);
     } finally {
       setLoading(false);
     }
