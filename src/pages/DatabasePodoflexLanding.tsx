@@ -6,24 +6,8 @@ import DatabaseServicesGrid from '@/components/DatabaseServicesGrid';
 import { CtaStripe } from '@/components/CtaStripe';
 import DatabaseContactSection from '@/components/DatabaseContactSection';
 import { Footer } from '@/components/Footer';
-import { useInitialSetup } from '@/hooks/useInitialSetup';
-import InitialSetup from '@/components/InitialSetup';
 
 const DatabasePodoflexLanding: React.FC = () => {
-  const { needsSetup, loading } = useInitialSetup();
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-subtle">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (needsSetup) {
-    return <InitialSetup />;
-  }
-
   return (
     <div className="min-h-screen">
       {/* Top Navigation */}

@@ -10,6 +10,7 @@ import PodoflexLanding from "./pages/PodoflexLanding";
 import DatabasePodoflexLanding from "./pages/DatabasePodoflexLanding";
 import AdminPanel from "./pages/AdminPanel";
 import Login from "./pages/Login";
+import InitialSetup from "./components/InitialSetup";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
@@ -28,6 +29,7 @@ const App = () => (
                 <Route path="/" element={<DatabasePodoflexLanding />} />
                 <Route path="/old" element={<PodoflexLanding />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/setup" element={<InitialSetup />} />
                 <Route 
                   path="/admin/*" 
                   element={
