@@ -26,8 +26,8 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<DatabasePodoflexLanding />} />
-                <Route path="/old" element={<PodoflexLanding />} />
+                <Route path="/" element={<PodoflexLanding />} />
+                <Route path="/old" element={<DatabasePodoflexLanding />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/setup" element={<InitialSetup />} />
                 <Route 
