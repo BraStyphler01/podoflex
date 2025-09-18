@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Navigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -100,6 +100,15 @@ const Login: React.FC = () => {
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
+          
+          <div className="mt-4 text-center">
+            <Link 
+              to="/forgot-password" 
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Forgot your password?
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>

@@ -8,6 +8,10 @@ interface AuthContextType {
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
+  resetPassword: (email: string) => Promise<{ error: any }>;
+  updatePassword: (newPassword: string) => Promise<{ error: any }>;
+  updateProfile: (updates: { full_name?: string; email?: string; avatar_url?: string }) => Promise<{ error: any }>;
+  uploadAvatar: (file: File) => Promise<{ error: any; url?: string }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -49,12 +53,86 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await supabase.auth.signOut();
   };
 
+  const resetPassword = async (email: string) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`
+    });
+    return { error };
+  };
+
+  const updatePassword = async (newPassword: string) => {
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword
+    });
+    return { error };
+  };
+
+  const updateProfile = async (updates: { full_name?: string; email?: string; avatar_url?: string }) => {
+    if (!user) return { error: new Error('No authenticated user') };
+
+    // Update Supabase auth user metadata
+    const authUpdates: any = {};
+    if (updates.full_name) authUpdates.full_name = updates.full_name;
+    if (updates.avatar_url) authUpdates.avatar_url = updates.avatar_url;
+    if (updates.email) authUpdates.email = updates.email;
+
+    if (Object.keys(authUpdates).length > 0) {
+      const { error: authError } = await supabase.auth.updateUser({
+        data: authUpdates,
+        ...(updates.email && { email: updates.email })
+      });
+      if (authError) return { error: authError };
+    }
+
+    // Update profiles table
+    const profileUpdates: any = {};
+    if (updates.full_name) profileUpdates.full_name = updates.full_name;
+    if (updates.email) profileUpdates.email = updates.email;
+    if (updates.avatar_url) profileUpdates.avatar_url = updates.avatar_url;
+
+    if (Object.keys(profileUpdates).length > 0) {
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update(profileUpdates)
+        .eq('user_id', user.id);
+      
+      if (profileError) return { error: profileError };
+    }
+
+    return { error: null };
+  };
+
+  const uploadAvatar = async (file: File) => {
+    if (!user) return { error: new Error('No authenticated user'), url: undefined };
+
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+
+    const { error, data } = await supabase.storage
+      .from('avatars')
+      .upload(fileName, file, {
+        upsert: true
+      });
+
+    if (error) return { error, url: undefined };
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('avatars')
+      .getPublicUrl(fileName);
+
+    return { error: null, url: publicUrl };
+  };
+
   const value = {
     user,
     session,
     loading,
     signIn,
     signOut,
+    resetPassword,
+    updatePassword,
+    updateProfile,
+    uploadAvatar,
   };
 
   return (

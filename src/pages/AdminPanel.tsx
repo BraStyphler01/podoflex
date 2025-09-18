@@ -9,6 +9,7 @@ import { WorkingHours } from './admin/WorkingHours';
 import { ThemeSettings } from './admin/ThemeSettings';
 import UserManagement from './admin/UserManagement';
 import ContentManager from './admin/ContentManager';
+import ProfileSettings from './admin/ProfileSettings';
 import { useToast } from '@/hooks/use-toast';
 
 const AdminPanel: React.FC = () => {
@@ -65,6 +66,7 @@ const AdminPanel: React.FC = () => {
         <Route path="theme" element={<ThemeSettings formData={formData} onInputChange={handleInputChange} />} />
         <Route path="users" element={<UserManagement />} />
         <Route path="content" element={<ContentManager />} />
+        <Route path="profile" element={<ProfileSettings />} />
       </Routes>
     </AdminLayout>
   );

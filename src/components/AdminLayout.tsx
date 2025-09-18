@@ -16,7 +16,8 @@ import {
   Clock,
   Menu,
   X,
-  LogOut
+  LogOut,
+  UserCircle
 } from 'lucide-react';
 
 interface AdminLayoutProps {
@@ -40,6 +41,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onSave, onReset, onPre
     { href: '/admin/theme', icon: Palette, label: 'Theme' },
     { href: '/admin/users', icon: Settings, label: 'Users' },
     { href: '/admin/content', icon: Settings, label: 'Content' },
+    { href: '/admin/profile', icon: UserCircle, label: 'Profile Settings' },
   ];
 
   const NavContent = ({ mobile = false }: { mobile?: boolean }) => (

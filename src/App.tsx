@@ -8,10 +8,11 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import PodoflexLanding from "./pages/PodoflexLanding";
 import DatabasePodoflexLanding from "./pages/DatabasePodoflexLanding";
-import AdminPanel from "./pages/AdminPanel";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
 import InitialSetup from "./components/InitialSetup";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import AdminPanel from "./pages/AdminPanel";
+import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
                 <Route path="/" element={<PodoflexLanding />} />
                 <Route path="/old" element={<DatabasePodoflexLanding />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/setup" element={<InitialSetup />} />
                 <Route 
                   path="/admin/*" 
