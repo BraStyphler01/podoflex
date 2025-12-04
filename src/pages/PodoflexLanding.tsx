@@ -25,16 +25,6 @@ const PodoflexLanding: React.FC = () => {
       {/* Footer */}
       <Footer />
       
-      {/* Admin Access */}
-      <div className="fixed bottom-4 right-4 z-50">
-        <a
-          href="/admin"
-          className="bg-teal text-white px-4 py-2 rounded-full shadow-lg hover:bg-teal/90 transition-colors text-sm font-medium"
-        >
-          Admin
-        </a>
-      </div>
-      
       {/* Structured Data */}
       <script
         type="application/ld+json"
